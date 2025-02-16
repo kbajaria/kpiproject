@@ -1,0 +1,2 @@
+https://<orgname>-<account_name>.snowflakecomputing.com
+https://USWDQAP-DL32084.snowflakecomputing.com

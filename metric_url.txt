@@ -1,0 +1,1 @@
+https://api.telemetry.confluent.cloud/v2/metrics/cloud/query?aggregations=[{"metric":"io.confluent.kafka.server/throughput"}]&filter={"resource_type":"kafka","resource_id":"<YOUR_CLUSTER_ID>"}&granularity=PT1M

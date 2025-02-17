@@ -1,3 +1,5 @@
+CREATE table SAMPLE_DATA_ORDERS_FLATTENED AS (
+
 WITH json_data AS (
     SELECT
         RECORD_CONTENT
@@ -15,3 +17,4 @@ SELECT
     
 FROM
     json_data
+);

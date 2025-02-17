@@ -1,0 +1,70 @@
+openapi: 3.0.0
+info:
+  title: Confluent Cloud Metrics API
+  description: API to retrieve performance metrics from Confluent Cloud
+  version: 1.0.0
+servers:
+  - url: https://api.telemetry.confluent.cloud/v2
+paths:
+  /metrics/cloud/query:
+    get:
+      summary: Retrieve performance metrics
+      description: Retrieve performance metrics from Confluent Cloud
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          example: Bearer <YOUR_API_KEY>
+        - name: aggregations
+          in: query
+          required: true
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                metric:
+                  type: string
+          example: [{"metric": "io.confluent.kafka.server/throughput"}]
+        - name: filter
+          in: query
+          required: true
+          schema:
+            type: object
+            properties:
+              resource_type:
+                type: string
+              resource_id:
+                type: string
+          example: {"resource_type": "kafka", "resource_id": "<YOUR_CLUSTER_ID>"}
+        - name: granularity
+          in: query
+          required: true
+          schema:
+            type: string
+          example: PT1M
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        metric:
+                          type: string
+                        value:
+                          type: number
+        '401':
+          description: Unauthorized
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
